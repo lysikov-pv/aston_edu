@@ -6,12 +6,12 @@ package lesson_6;
  * Внутри класса «Сотрудник» написать метод, который выводит информацию об объекте в консоль.
  */
 public class Person {
-    public String name;
-    public String position;
-    public String email;
-    public String phoneNumber;
-    public long salary;
-    public int age;
+    private String name;
+    private String position;
+    private String email;
+    private String phoneNumber;
+    private long salary;
+    private int age;
 
     public Person(String name, String position, String email, String phoneNumber, long salary, int age) {
         this.name = name;

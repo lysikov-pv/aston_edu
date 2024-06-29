@@ -5,7 +5,7 @@ package lesson_6;
  * времени их работы и стоимости.
  */
 public class Park {
-    public String name;
+    private String name;
 
     public Park(String name) {
         this.name = name;
