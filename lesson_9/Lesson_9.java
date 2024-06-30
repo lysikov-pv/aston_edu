@@ -13,20 +13,19 @@ public class Lesson_9 {
         String[] inputWords = {"дом", "стул", "стол", "книга", "ручка", "дом", "стена", "ковер", "книга", "окно", "стул", "дом", "ковер", "стена", "окно"};
         Map<String, Integer> freqMap = new HashMap<>(createFreqMap(inputWords));
 
+        // System.out.println(freqMap);
         System.out.print("Список уникальных слов: ");
         freqMap.forEach((k, v) -> System.out.print("\'" + k + "\' "));
         System.out.println();
 
         freqMap.forEach((k, v) -> System.out.println("Слово: \'" + k + "\' Повторений: " + v));
-
-
     }
 
     public static Map<String, Integer> createFreqMap(String[] strings) {
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        Map<String, Integer> map = new HashMap<>();
         for (String key : strings) {
-            Integer count = map.get(key);
-            map.put(key, (count == null) ? 1 : count + 1);
+            Integer count = map.getOrDefault(key, 0);
+            map.put(key, count + 1);
         }
         return map;
     }
