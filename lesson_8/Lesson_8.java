@@ -17,24 +17,35 @@ public class Lesson_8 {
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[0].length; j++) {
                 try {
-                    result += Integer.parseInt(arr[i][j]);
-                } catch (NumberFormatException e) {
-                    throw new MyArrayDataException("В ячейке не целое число: [" + i + "," + j + "] = \'" + arr[i][j] + "\'");
+                    result += parseInt(arr, i, j);
+                } catch (MyArrayDataException e) {
+                    System.err.println(e);
                 }
             }
         }
         return result;
     }
 
+    private static int parseInt(String[][] arr, int i, int j) throws MyArrayDataException {
+        try {
+            return Integer.parseInt(arr[i][j]);
+        } catch (NumberFormatException e) {
+            throw new MyArrayDataException("В ячейке не целое число: [" + i + "," + j + "] = \'" + arr[i][j] + "\'");
+        }
+    }
+
+
     public static void main(String[] args) throws MyArraySizeException, MyArrayDataException {
 
         // String[][] arr = {{"1","2","3","4"}, {"1","2","3","4"}, {"1","2","3","4"}, {"-1","-2","-3","-4"}};   // сумма 20
         // String[][] arr = {{"5","7","3","17"}, {"7","0","1","12"}, {"8","1","2","3"}};                        // MyArraySizeException
-        String[][] arr = {{"1",null,"3","4"}, {"1","@","3","4"}, {"1","2","3","4"}, {"-1","-2","-3","-4"}};     // MyArrayDataException
-        try {
+        String[][] arr = {{"1", null, "3", "4"}, {"1", "@", "3", "4"}, {"1", "2", "3", "4"}, {"-1", "-2", "-3", "-4"}};     // MyArrayDataException
+        System.out.println("Сумма элементов массива: " + sumArray4x4Cells(arr));
+
+        /*try {
             System.out.println("Сумма элементов массива: " + sumArray4x4Cells(arr));
         } catch (Exception e) {
             System.out.println("Ошибка: " + e.getMessage());
-        }
+        }*/
     }
 }
