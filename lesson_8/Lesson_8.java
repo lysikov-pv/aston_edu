@@ -10,7 +10,7 @@ package lesson_8;
  * MyArrayDataException и вывести результат расчета.
  */
 public class Lesson_8 {
-    public static Integer sumArray4x4Cells(String[][] arr) throws MyArraySizeException, MyArrayDataException {
+    public static Integer sumArray4x4(String[][] arr) throws MyArraySizeException, MyArrayDataException {
         if (arr.length != 4 || arr[0].length != 4)
             throw new MyArraySizeException("Массив не 4x4: " + arr.length + "x" + arr[0].length);
         int result = 0;
@@ -34,16 +34,18 @@ public class Lesson_8 {
 
     public static void main(String[] args) throws MyArraySizeException, MyArrayDataException {
 
-        // String[][] arr = {{"1","2","3","4"}, {"1","2","3","4"}, {"1","2","3","4"}, {"-1","-2","-3","-4"}};   // сумма 20
-        // String[][] arr = {{"5","7","3","17"}, {"7","0","1","12"}, {"8","1","2","3"}};                        // MyArraySizeException
+        // String[][] arr = {{"1","2","3","4"}, {"1","2","3","4"}, {"1","2","3","4"}, {"-1","-2","-3","-4"}};               // сумма 20
+        // String[][] arr = {{"5","7","3","17"}, {"7","0","1","12"}, {"8","1","2","3"}};                                    // MyArraySizeException
         String[][] arr = {{"1", null, "3", "4"}, {"1", "@", "3", "4"}, {"1", "2", "3", "4"}, {"-1", "-2", "-3", "-4"}};     // MyArrayDataException
-        Integer sum = sumArray4x4Cells(arr);
+        Integer sum = sumArray4x4(arr);
         System.out.println("Сумма элементов массива: " + ((sum == null) ? "ошибка" : sum));
 
-        /* try {
-            System.out.println("Сумма элементов массива: " + sumArray4x4Cells(arr));
-        } catch (Exception e) {
-            System.out.println("Ошибка: " + e.getMessage());
-        } */
+        // Для того чтобы отразить все символы, которые нельзя преобразовать,
+        // ловим исключение прям в методе sumArray4x4 двойным try-catch, но можно было использовать внешний try-catch
+        // try {
+        //    System.out.println("Сумма элементов массива: " + sumArray4x4(arr));
+        // } catch (Exception e) {
+        //    System.err.println("Ошибка: " + e.getMessage());
+        // }
     }
 }
