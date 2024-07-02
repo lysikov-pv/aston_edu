@@ -19,6 +19,18 @@ public class Lesson_9 {
         System.out.println();
 
         freqMap.forEach((k, v) -> System.out.println("Слово: \'" + k + "\' Повторений: " + v));
+
+        /**
+         * 2. Написать простой класс Телефонный Справочник, который хранит в себе список фамилий и телефонных номеров.
+         * В этот телефонный справочник с помощью метода add() можно добавлять записи, а с помощью метода get() искать
+         * номер телефона по фамилии. Следует учесть, что под одной фамилией может быть несколько телефонов (в случае
+         * однофамильцев), тогда при запросе такой фамилии должны выводиться все телефоны.
+         */
+        Phonebook.add("Ivanov", "+7123456");
+        Phonebook.add("Petrov", "+7567890");
+        Phonebook.add("Ivanov", "+7654321");
+        Phonebook.get("ivanov");
+        Phonebook.get("sidorov");
     }
 
     public static Map<String, Integer> createFreqMap(String[] strings) {
