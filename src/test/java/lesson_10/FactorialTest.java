@@ -21,10 +21,10 @@ public class FactorialTest {
 
     @Test
     void naturalLong() {
-        Assertions.assertEquals(BigInteger.valueOf(6227020800l), Factorial.get(13));
-        Assertions.assertEquals(BigInteger.valueOf(87178291200l), Factorial.get(14));
-        Assertions.assertEquals(BigInteger.valueOf(121645100408832000l), Factorial.get(19));
-        Assertions.assertEquals(BigInteger.valueOf(2432902008176640000l), Factorial.get(20)); // Граничное значение факториала которое помещается в long
+        Assertions.assertEquals(BigInteger.valueOf(6227020800L), Factorial.get(13));
+        Assertions.assertEquals(BigInteger.valueOf(87178291200L), Factorial.get(14));
+        Assertions.assertEquals(BigInteger.valueOf(121645100408832000L), Factorial.get(19));
+        Assertions.assertEquals(BigInteger.valueOf(2432902008176640000L), Factorial.get(20)); // Граничное значение факториала которое помещается в long
     }
 
     @Test
