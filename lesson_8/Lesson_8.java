@@ -10,42 +10,35 @@ package lesson_8;
  * MyArrayDataException и вывести результат расчета.
  */
 public class Lesson_8 {
-    public static Integer sumArray4x4(String[][] arr) throws MyArraySizeException, MyArrayDataException {
-        if (arr.length != 4 || arr[0].length != 4)
-            throw new MyArraySizeException("Массив не 4x4: " + arr.length + "x" + arr[0].length);
-        int result = 0;
-        boolean dataException = false;
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[0].length; j++) {
-                try {
-                    try {
-                        result += Integer.parseInt(arr[i][j]);
-                    } catch (NumberFormatException e) {
-                        dataException = true;
-                        throw new MyArrayDataException("В ячейке не целое число: [" + i + "," + j + "] = \'" + arr[i][j] + "\'");
-                    }
-                } catch (MyArrayDataException e) {
-                    System.err.println(e);
-                }
-            }
+
+    public static void main(String[] args) {
+
+        System.out.println("1. Корректный массив с суммой эл-в 20 -> 20");
+        String[][] arr = {{"1", "2", "3", "4"}, {"1", "2", "3", "4"}, {"1", "2", "3", "4"}, {"-1", "-2", "-3", "-4"}};
+        try {
+            System.out.println("Сумма элементов массива: " + Array4x4.sum(arr));
+        } catch (Exception e) {
+            System.err.println(e);
         }
-        return dataException ? null : result;
-    }
 
-    public static void main(String[] args) throws MyArraySizeException, MyArrayDataException {
+        System.out.println("2. Массив размера 4х3 -> MyArraySizeException");
+        arr = new String[][]{{"5", "7", "3", "17"}, {"7", "0", "1", "12"}, {"8", "1", "2", "3"}};
+        try {
+            System.out.println("Сумма элементов массива: " + Array4x4.sum(arr));
+        } catch (Exception e) {
+            System.err.println(e);
+        }
 
-        // String[][] arr = {{"1","2","3","4"}, {"1","2","3","4"}, {"1","2","3","4"}, {"-1","-2","-3","-4"}};               // сумма 20
-        // String[][] arr = {{"5","7","3","17"}, {"7","0","1","12"}, {"8","1","2","3"}};                                    // MyArraySizeException
-        String[][] arr = {{"1", null, "3", "4"}, {"1", "@", "3", "4"}, {"1", "2", "3", "4"}, {"-1", "-2", "-3", "-4"}};     // MyArrayDataException
-        Integer sum = sumArray4x4(arr);
+        System.out.println("3. Массив 4х4, не только числа -> MyArrayDataException");
+        arr = new String[][]{{"1", null, "3", "4"}, {"1", "@", "3", "4"}, {"1", "2", "3", "4"}, {"-1", "-2", "-3", "-4"}};
+        try {
+            System.out.println("Сумма элементов массива: " + Array4x4.sum(arr));
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        System.out.println("4. Массив 4х4, не только числа -> несколько MyArrayDataException");
+        Integer sum = Array4x4.sumWithInnerErrPrint(arr);
         System.out.println("Сумма элементов массива: " + ((sum == null) ? "ошибка" : sum));
-
-        // Для того чтобы отразить все символы, которые нельзя преобразовать,
-        // ловим исключение прям в методе sumArray4x4 двойным try-catch, но можно было использовать внешний try-catch
-        // try {
-        //    System.out.println("Сумма элементов массива: " + sumArray4x4(arr));
-        // } catch (Exception e) {
-        //    System.err.println("Ошибка: " + e.getMessage());
-        // }
     }
 }
