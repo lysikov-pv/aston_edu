@@ -1,6 +1,5 @@
 package lesson_13;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +13,7 @@ import java.net.URL;
 import java.util.List;
 
 public class MtsHomePage {
-    public static WebDriver driver;
+    public WebDriver driver;
 
     public MtsHomePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -25,63 +24,63 @@ public class MtsHomePage {
      * Определение локатора для заголовка формы быстрой оплаты
      */
     @FindBy(css = "section.pay h2")
-    private static WebElement paySectionTitle;
+    private WebElement paySectionTitle;
 
     /**
      * Определение локатора для кнопки отмены сохранения куков
      */
     @FindBy(css = "div.cookie.show button.cookie__cancel")
-    private static WebElement cookieCancelBtn;
+    private WebElement cookieCancelBtn;
 
     /**
      * Определение локатора для ссылки "Подробнее о сервисе"
      */
     @FindBy(xpath = "//section[@class='pay']//a[contains(text(),'Подробнее о сервисе')]")
-    private static WebElement link;
+    private WebElement link;
 
     /**
      * Определение локатора для поля телефон
      */
     @FindBy(css = "#connection-phone")
-    private static WebElement phoneField;
+    private WebElement phoneField;
 
     /**
      * Определение локатора для поля сумма пополнения
      */
     @FindBy(css = "#connection-sum")
-    private static WebElement sumField;
+    private WebElement sumField;
 
     /**
      * Определение локатора для кнопки пополнить
      */
     @FindBy(css = "section.pay button[type='submit']")
-    private static WebElement payBtn;
+    private WebElement payBtn;
 
     /**
      * Определение локатора для окна ввода реквизитов пополнения
      */
     @FindBy(css = "iframe.bepaid-iframe")
-    private static WebElement payFrame;
+    private WebElement payFrame;
 
     /**
      * Определение локаторов для картинок в форме пополнения
      */
     @FindBy(xpath = "//section[@class='pay']//img")
-    private static List<WebElement> payImgages;
+    private List<WebElement> payImgages;
 
     /**
      * Метод возвращает заголовок формы оплаты
      *
      * @return заголовок формы оплаты
      */
-    public static String getPaySectionTitle() {
+    public String getPaySectionTitle() {
         return paySectionTitle.getText().replaceAll("\n|\r\n", " ");
     }
 
     /**
      * Метод нажатия на кнопку отмены сохранения куков
      */
-    public static void clickCookieCancelBtn() {
+    public void clickCookieCancelBtn() {
         cookieCancelBtn.click();
     }
 
@@ -90,7 +89,7 @@ public class MtsHomePage {
      *
      * @return url ссылки "Подробнее о сервисе"
      */
-    public static String getLinkUrl() throws NoSuchElementException {
+    public String getLinkUrl() throws NoSuchElementException {
         return link.getAttribute("href");
     }
 
@@ -102,7 +101,7 @@ public class MtsHomePage {
      * @throws MalformedURLException ссылка имеет не корректный формат
      * @throws IOException           не удается созадть коннект
      */
-    public static int getRespCode(String urlLink) throws MalformedURLException, IOException {
+    public int getRespCode(String urlLink) throws MalformedURLException, IOException {
         URL url = new URL(urlLink);
         HttpURLConnection httpURLConnect = (HttpURLConnection) url.openConnection();
         httpURLConnect.setConnectTimeout(5000);
@@ -116,7 +115,7 @@ public class MtsHomePage {
      * @param phoneNumber номер телефона
      * @throws NoSuchElementException поле не найдено
      */
-    public static void setPhoneField(String phoneNumber) throws NoSuchElementException {
+    public void setPhoneField(String phoneNumber) throws NoSuchElementException {
         phoneField.sendKeys(phoneNumber);
     }
 
@@ -126,7 +125,7 @@ public class MtsHomePage {
      * @param sum сумма пополнения
      * @throws NoSuchElementException поле не найдено
      */
-    static void setSumField(String sum) throws NoSuchElementException {
+    public void setSumField(String sum) throws NoSuchElementException {
         sumField.sendKeys(sum);
     }
 
@@ -135,7 +134,7 @@ public class MtsHomePage {
      *
      * @throws NoSuchElementException кнопка не найдена
      */
-    public static void clickPayBtn() throws NoSuchElementException {
+    public void clickPayBtn() throws NoSuchElementException {
         payBtn.click();
     }
 
@@ -145,7 +144,7 @@ public class MtsHomePage {
      * @return ссылка на фрейм
      * @throws NoSuchElementException фрейм не найден
      */
-    public static String getFrameLink() throws NoSuchElementException {
+    public String getFrameLink() throws NoSuchElementException {
         return payFrame.getAttribute("src");
     }
 
@@ -154,7 +153,7 @@ public class MtsHomePage {
      * @param scr имя картинки
      * @return отображатся ли картинка
      */
-    public static boolean isDisplayedImg(String scr) {
+    public boolean isDisplayedImg(String scr) {
         for (WebElement payImage : payImgages) {
             if (payImage.getAttribute("src").contains(scr)) {
                 return payImage.isDisplayed();
