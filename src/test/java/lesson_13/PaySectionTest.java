@@ -34,18 +34,20 @@ public class PaySectionTest {
     }
 
     @Test
+    @DisplayName("Заголовок формы")
     public void title() {
         String name = "Заголовок";
         try {
             String actualValue = mtsHomePage.getPaySectionTitle();
             assertEquals("Онлайн пополнение без комиссии", actualValue, name + " не совпадает");
-            System.out.println(name + "совпадает: " + actualValue);
+            System.out.println(name + " совпадает: " + actualValue);
         } catch (NoSuchElementException e) {
             assertTrue(false, name + " не найден");
         }
     }
 
     @ParameterizedTest
+    @DisplayName("Картинки платежных систем")
     @ValueSource(strings = {"visa.svg", "visa-verified.svg", "mastercard.svg", "mastercard-secure.svg", "belkart.svg"})
     void payPics(String src) {
         try {
@@ -57,8 +59,8 @@ public class PaySectionTest {
     }
 
     @Test
+    @DisplayName("Ссылка 'Подробнее о сервисе'")
     void detailLink() {
-
         String urlLink = null;
         try {
             urlLink = mtsHomePage.getLinkUrl();
@@ -75,6 +77,7 @@ public class PaySectionTest {
     }
 
     @Test
+    @DisplayName("Работа кнопки 'Продолжить'")
     void payForm() {
         String name = "Окно оплаты";
         try {
