@@ -2,6 +2,7 @@ package lesson_14;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -40,6 +41,7 @@ public class PayFrameTest {
         driver.quit();
     }
     @Test
+    @DisplayName("Сумма в заголовке")
     void descriptionCost() {
         String name = "Текст описания суммы в заголовке";
         try {
@@ -51,6 +53,7 @@ public class PayFrameTest {
         }
     }
     @Test
+    @DisplayName("Текст кнопки оплаты")
     void btnText() {
         String name = "Текст кнопки";
         try {
@@ -62,6 +65,7 @@ public class PayFrameTest {
         }
     }
     @Test
+    @DisplayName("Номер телефона в заголовке")
     void descriptionPhone() {
         String name = "Номер телефона в заголовке";
         try {
@@ -74,6 +78,7 @@ public class PayFrameTest {
     }
 
     @ParameterizedTest
+    @DisplayName("Картинки платежных систем")
     @ValueSource(strings = {"mastercard-system.svg", "visa-system.svg", "belkart-system.svg", "mir-system-ru.svg", "maestro-system.svg"})
     void payPics(String src) {
         try {
@@ -85,25 +90,26 @@ public class PayFrameTest {
     }
 
     @ParameterizedTest
+    @DisplayName("Плейсхолдеры реквизитов карты")
     @CsvSource({
-            "Плейсхолдер поля ввода номера карты, Номер карты",
-            "Плейсхолдер поля ввода срока действия карты, Срок действия",
-            "Плейсхолдер поля ввода CVC, CVC",
-            "Плейсхолдер поля ввода имени держателя, Имя держателя (как на карте)"})
+            "Поле ввода номера карты, Номер карты",
+            "Поле ввода срока действия карты, Срок действия",
+            "Поле ввода CVC, CVC",
+            "Поле ввода имени держателя, Имя держателя (как на карте)"})
     void checkPlaceholders(String name, String expectedPlaceholder) {
         try {
             String actualPlaceholder = "";
             switch (name) {
-                case ("Плейсхолдер поля ввода номера карты"):
+                case ("Поле ввода номера карты"):
                     actualPlaceholder = payFrame.getCreditCardPlaceholder();
                     break;
-                case ("Плейсхолдер поля ввода срока действия карты"):
+                case ("Поле ввода срока действия карты"):
                     actualPlaceholder = payFrame.getExpirationDatePlaceholder();
                     break;
-                case ("Плейсхолдер поля ввода CVC"):
+                case ("Поле ввода CVC"):
                     actualPlaceholder = payFrame.getCvcPlaceholder();
                     break;
-                case ("Плейсхолдер поля ввода имени держателя"):
+                case ("Поле ввода имени держателя"):
                     actualPlaceholder = payFrame.getCardHolderPlaceholder();
                     break;
             }
