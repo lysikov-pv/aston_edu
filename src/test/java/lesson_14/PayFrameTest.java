@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@DisplayName("Проверка окна ввода реквизитов карты")
 public class PayFrameTest {
     public static WebDriver driver;
     public static MtsHomePage mtsHomePage;
@@ -44,49 +45,29 @@ public class PayFrameTest {
     @DisplayName("Сумма в заголовке")
     void descriptionCost() {
         String name = "Текст описания суммы в заголовке";
-        try {
-            String actualValue = payFrame.getPayFrameDescriptionCost();
-            assertEquals(TEST_SUM + " BYN", actualValue, name + " не совпадает");
-            System.out.println(name + " совпадает: " + payFrame.getPayFrameDescriptionCost());
-        } catch (NoSuchElementException e) {
-            assertTrue(false, name + " не найден");
-        }
+        String actualValue = payFrame.getPayFrameDescriptionCost();
+        assertEquals(TEST_SUM + " BYN", actualValue, name + " не совпадает");
     }
     @Test
     @DisplayName("Текст кнопки оплаты")
     void btnText() {
         String name = "Текст кнопки";
-        try {
-            String actualValue = payFrame.getPayFrameBtnText();
-            assertEquals("Оплатить " + TEST_SUM + " BYN", actualValue, name + " не совпадает");
-            System.out.println(name + " совпадает: " + actualValue);
-        } catch (NoSuchElementException e) {
-            assertTrue(false, name + " не найден");
-        }
+        String actualValue = payFrame.getPayFrameBtnText();
+        assertEquals("Оплатить " + TEST_SUM + " BYN", actualValue, name + " не совпадает");
     }
     @Test
     @DisplayName("Номер телефона в заголовке")
     void descriptionPhone() {
         String name = "Номер телефона в заголовке";
-        try {
-            String actualValue = payFrame.getPayFrameDescriptionPhone();
-            assertEquals("Оплата: Услуги связи Номер:375" + TEST_PHONE_NUMBER, actualValue, name + " не совпадает");
-            System.out.println(name + " совпадает: " + actualValue);
-        } catch (NoSuchElementException e) {
-            assertTrue(false, name + " не найден");
-        }
+        String actualValue = payFrame.getPayFrameDescriptionPhone();
+        assertEquals("Оплата: Услуги связи Номер:375" + TEST_PHONE_NUMBER, actualValue, name + " не совпадает");
     }
 
     @ParameterizedTest
     @DisplayName("Картинки платежных систем")
     @ValueSource(strings = {"mastercard-system.svg", "visa-system.svg", "belkart-system.svg", "mir-system-ru.svg", "maestro-system.svg"})
     void payPics(String src) {
-        try {
-            assertTrue(payFrame.isDisplayedImg(src), "Картинка " + src + " не отображается");
-            System.out.println("Картинка " + src + " отображается");
-        } catch (NoSuchElementException e) {
-            assertTrue(false, "Картинка " + src + " не найдена");
-        }
+        assertTrue(payFrame.isDisplayedImg(src), "Картинка " + src + " не отображается");
     }
 
     @ParameterizedTest
@@ -97,26 +78,21 @@ public class PayFrameTest {
             "Поле ввода CVC, CVC",
             "Поле ввода имени держателя, Имя держателя (как на карте)"})
     void checkPlaceholders(String name, String expectedPlaceholder) {
-        try {
-            String actualPlaceholder = "";
-            switch (name) {
-                case ("Поле ввода номера карты"):
-                    actualPlaceholder = payFrame.getCreditCardPlaceholder();
-                    break;
-                case ("Поле ввода срока действия карты"):
-                    actualPlaceholder = payFrame.getExpirationDatePlaceholder();
-                    break;
-                case ("Поле ввода CVC"):
-                    actualPlaceholder = payFrame.getCvcPlaceholder();
-                    break;
-                case ("Поле ввода имени держателя"):
-                    actualPlaceholder = payFrame.getCardHolderPlaceholder();
-                    break;
-            }
-            assertEquals(expectedPlaceholder, actualPlaceholder, name + " не совпадает");
-            System.out.println(name + " совпадает: " + actualPlaceholder);
-        } catch (NoSuchElementException e) {
-            assertTrue(false, name + " не найден");
+        String actualPlaceholder = "";
+        switch (name) {
+            case ("Поле ввода номера карты"):
+                actualPlaceholder = payFrame.getCreditCardPlaceholder();
+                break;
+            case ("Поле ввода срока действия карты"):
+                actualPlaceholder = payFrame.getExpirationDatePlaceholder();
+                break;
+            case ("Поле ввода CVC"):
+                actualPlaceholder = payFrame.getCvcPlaceholder();
+                break;
+            case ("Поле ввода имени держателя"):
+                actualPlaceholder = payFrame.getCardHolderPlaceholder();
+                break;
         }
+        assertEquals(expectedPlaceholder, actualPlaceholder, name + " не совпадает");
     }
 }
